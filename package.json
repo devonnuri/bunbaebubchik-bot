@@ -1,0 +1,13 @@
+{
+    "name": "bunbaebubchik",
+    "description": "Bu..Bu..BunBaeBubChik!",
+    "version": "0.1.0",
+    "main": "app.js",
+    "scripts": {
+        "start": "node app.js"
+    },
+    "dependencies": {
+        "discord.js": "11.3.0",
+        "request": "2.83.0"
+    }
+}
