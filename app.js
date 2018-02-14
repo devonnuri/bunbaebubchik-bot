@@ -14,29 +14,23 @@ client.on('ready', () => {
     console.log('I am ready!!')
 });
 
-// client.on('message', message => {
-//     if(message.content == '!레벨') {
-//         message.channel.send("안녕하세요");
-//         message.author.send(prefix+'당신의 현재 레벨은 '+userdata[message.author.id]["level"]+'입니다!')
-//     } else {
-//         if(userdata[message.author.id] != undefined) {
-//             userdata[message.author.id]["level"] = 0;
-//         }
-//         userdata[message.author.id]["level"] += 1;
-//         updateData();
-//     }
-// });
-
-// client.on('guildMemberAdd', message => {
-//     member.send(prefix+"공주중배그 서버에 오신 것을 환영합니다..!")
-//     userdata[message.author.id]["level"] = 0;
-//     updateData();
-// });
-
 client.on('message', message => {
-    if(message.content == "ㅁㄴㅇㄹ") {
-        message.author.send("ㅁㄴㅇㄹ?");
+    if(message.content == '!레벨') {
+        message.channel.send("안녕하세요");
+        message.author.send(prefix+'당신의 현재 레벨은 '+userdata[message.author.id]["level"]+'입니다!')
+    } else {
+        if(userdata[message.author.id] != undefined) {
+            userdata[message.author.id]["level"] = 0;
+        }
+        userdata[message.author.id]["level"] += 1;
+        updateData();
     }
-})
+});
+
+client.on('guildMemberAdd', message => {
+    member.send(prefix+"공주중배그 서버에 오신 것을 환영합니다..!")
+    userdata[message.author.id]["level"] = 0;
+    updateData();
+});
 
 client.login(process.env.BOT_TOKEN)
