@@ -28,7 +28,7 @@ const prefix = "부..부..분배법칙..! ";
 
 client.on('message', message => {
     if(message.content == '!레벨') {
-        message.reply("ㅁㄴㅇㄹ");
+        message.author.send("ㅁㄴㅇㄹ");
     }
 })
 
