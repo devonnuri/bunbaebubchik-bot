@@ -10,21 +10,13 @@ function updateData() {
     fs.writeFile('./user.json', JSON.stringify(userdata), console.error)
 }
 
-String.prototype.format = function() {
-    a = this;
-    for (k in arguments) {
-        a = a.replace("{" + k + "}", arguments[k])
-    }
-    return a
-}
-
 client.on('ready', () => {
     console.log('I am ready!!')
 });
 
 client.on('message', message => {
     if(message.content == '!레벨') {
-        message.reply(prefix+'당신의 현재 레벨은 {0}입니다!'.format(userdata[message.author.id]["level"]))
+        message.author.send(prefix+'당신의 현재 레벨은 '+userdata[message.author.id]["level"]+'입니다!')
     } else {
         if(userdata[message.author.id] != undefined) {
             userdata[message.author.id]["level"] = 0;
