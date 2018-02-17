@@ -70,7 +70,7 @@ function onMessage(message) {
     } else {
         query(`SELECT exp FROM users WHERE id='${message.author.id}'`, res => {
             let exp = res.rows[0].exp;
-            let addedExp = message.length*EXP_PER_CHARCTER;
+            let addedExp = message.content.length*EXP_PER_CHARCTER;
             let prevLevel = getLevel(res.rows[0].exp);
             let nextLevel = getLevel(res.rows[0].exp+addedExp);
 
