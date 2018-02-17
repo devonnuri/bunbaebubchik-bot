@@ -4,6 +4,7 @@ const {Client} = require('pg');
 const db = new Client({connectionString: process.env.DATABASE_URL});
 
 const prefix = "부..부..분배법칙..! ";
+const EXP_PER_CHARCTER = 7;
 
 function getLevel(exp) {
     return Math.floor(0.1*Math.sqrt(exp));
@@ -56,7 +57,7 @@ function onMessage(message) {
             let result = '\n';
             res.rows.sort((a, b) => {return (a.exp > b.exp) ? -1 : ((a.exp < b.exp) ? 1 : 0)});
             res.rows.forEach((e, i) => {
-                if(e.id == message.author.id.toString()) {
+                if(parseInt(e.id) == message.author.id) {
                     result += `**${i+1}위) ${e.username.trim()} (Lv.${getLevel(e.exp)}, ${e.exp})**\n`;
                 } else {
                     result += `${i+1}위) ${e.username.trim()} (Lv.${getLevel(e.exp)}, ${e.exp})\n`;
@@ -69,13 +70,14 @@ function onMessage(message) {
     } else {
         query(`SELECT exp FROM users WHERE id='${message.author.id}'`, res => {
             let exp = res.rows[0].exp;
+            let addedExp = message.length*EXP_PER_CHARCTER;
             let prevLevel = getLevel(res.rows[0].exp);
-            let nextLevel = getLevel(res.rows[0].exp+100);
+            let nextLevel = getLevel(res.rows[0].exp+addedExp);
 
             if(prevLevel < nextLevel) {
                 message.channel.send(`${prefix}축하드립니다! **${message.author.username}**님의 레벨이 ${prevLevel}에서 ${nextLevel}로 올라갔습니다!`);
             }
-            query(`UPDATE users SET exp=${exp+100} WHERE id='${message.author.id}'`);
+            query(`UPDATE users SET exp=${exp+addedExp} WHERE id='${message.author.id}'`);
         });
     }
 }
