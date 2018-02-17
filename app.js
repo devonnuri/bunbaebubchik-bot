@@ -56,10 +56,10 @@ function onMessage(message) {
             let result = '\n';
             res.rows.sort((a, b) => {return (a.exp > b.exp) ? -1 : ((a.exp < b.exp) ? 1 : 0)});
             res.rows.forEach((e, i) => {
-                if(e.id == message.author.id) {
+                if(e.id == message.author.id.toString()) {
                     result += `**${i+1}위) ${e.username.trim()} (Lv.${getLevel(e.exp)}, ${e.exp})**\n`;
                 } else {
-                    result += `${i+1}위) ${e.username} (Lv.${getLevel(e.exp)}, ${e.exp})\n`;
+                    result += `${i+1}위) ${e.username.trim()} (Lv.${getLevel(e.exp)}, ${e.exp})\n`;
                 }
             });
             message.reply(result);
